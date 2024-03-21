@@ -31,4 +31,11 @@ spec:
         - name: CREATE_COLLECTION_PARAMS
           value: "name=nexustiles&numShards=$(MINIMUM_NODES)&waitForFinalState=true"
       restartPolicy: Always
+      tolerations:
+        - key: "sdap-role"
+          operator: "Equal"
+          value: "driver"
+          effect: "NoSchedule"
+      nodeSelector:
+        sdap-role: driver
 {{ end }}

@@ -63,6 +63,13 @@ spec:
             {{- end }}
             - name: collections-config-volume
               mountPath: {{ include "nexus.collectionsConfig.mountPath" . }}
+      tolerations:
+        - key: "sdap-role"
+          operator: "Equal"
+          value: "driver"
+          effect: "NoSchedule"
+      nodeSelector:
+        sdap-role: driver
 {{- if not .Values.ingestion.granules.s3.bucket }}
 {{ include "nexus.ingestion.dataVolumeMount" . | indent 12 }}
 {{- end }}

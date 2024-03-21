@@ -21,5 +21,12 @@ spec:
         - name: config-operator
           image: {{ .Values.ingestion.configOperator.image }}
           imagePullPolicy: Always
+      tolerations:
+        - key: "sdap-role"
+          operator: "Equal"
+          value: "driver"
+          effect: "NoSchedule"
+      nodeSelector:
+        sdap-role: driver
 {{ end }}
 {{ end }}
